@@ -306,7 +306,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kcx6q")
 }],
-"loop": true,
+"loop": false,
 "name": &"swing_down",
 "speed": 5.0
 }, {
@@ -323,7 +323,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xhr5e")
 }],
-"loop": true,
+"loop": false,
 "name": &"swing_right",
 "speed": 5.0
 }, {
@@ -340,7 +340,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wgj8d")
 }],
-"loop": true,
+"loop": false,
 "name": &"swing_up",
 "speed": 5.0
 }, {
@@ -363,7 +363,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_77y27")
 }],
-"loop": true,
+"loop": false,
 "name": &"walk_down",
 "speed": 5.0
 }, {
@@ -386,7 +386,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0j0uf")
 }],
-"loop": true,
+"loop": false,
 "name": &"walk_right",
 "speed": 5.0
 }, {
@@ -409,7 +409,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vumtw")
 }],
-"loop": true,
+"loop": false,
 "name": &"walk_up",
 "speed": 5.0
 }]
@@ -421,7 +421,7 @@ script = ExtResource("1_s4vwa")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_6j7uf")
-animation = &"dying"
+animation = &"walk_up"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, 1)

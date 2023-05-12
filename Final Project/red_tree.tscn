@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwfmy4lfnil4e"]
+
+[ext_resource type="Script" path="res://red_tree.gd" id="1_2umly"]
+[ext_resource type="Texture2D" uid="uid://t3bcw410fht5" path="res://Assets/rpgoverworldtileset_V2/RedTree.png" id="2_xy748"]
+
+[node name="RedTree" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_2umly")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-34, 72, -3, 87, 37, 77, 30, 33, -31, 32)
+
+[node name="RedTree" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(7, 9)
+texture = ExtResource("2_xy748")

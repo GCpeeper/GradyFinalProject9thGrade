@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://dj0ymarmmupvr"]
+
+[ext_resource type="Texture2D" uid="uid://dl5ij2s24dqbk" path="res://charatcters/Adventurer-1.5/adventurer-v1.5-Sheet.png" id="1_2jer1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6agi"]
+atlas = ExtResource("1_2jer1")
+region = Rect2(52, 37, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjsb3"]
+atlas = ExtResource("1_2jer1")
+region = Rect2(102, 37, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0j67"]
+atlas = ExtResource("1_2jer1")
+region = Rect2(152, 37, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8ac7"]
+atlas = ExtResource("1_2jer1")
+region = Rect2(202, 37, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2j0q"]
+atlas = ExtResource("1_2jer1")
+region = Rect2(252, 37, 50, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rjq4o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6agi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjsb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0j67")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8ac7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2j0q")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="PlayerSide" type="CharacterBody2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rjq4o")
+animation = &"Idle"
+autoplay = "Idle"

@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Charater
 
 enum State {IDLE, MOVE_RIGHT, MOVE_LEFT, MOVE_UP, MOVE_DOWN, ATTACK, DYING, DEAD}
 const MOVE_STATES = [State.MOVE_DOWN, State.MOVE_LEFT, State.MOVE_RIGHT, State.MOVE_UP]

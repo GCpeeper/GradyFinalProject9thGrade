@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgru3gjiayvpb"]
+
+[ext_resource type="Texture2D" uid="uid://bi8qkbdld8e7n" path="res://Assets/Particles/Explosion_Sheet.png" id="1_30mnm"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x2vkt"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_yrvgp"]
+offsets = PackedFloat32Array(0, 0.533333, 1)
+colors = PackedColorArray(0.941176, 0.521569, 0.0941176, 1, 0.862745, 0.129412, 0.054902, 0.47451, 0, 0, 0, 0.054902)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8xl5d"]
+gradient = SubResource("Gradient_yrvgp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b17us"]
+emission_shape = 1
+emission_sphere_radius = 125.0
+particle_flag_disable_z = true
+direction = Vector3(1, -10, 0)
+spread = 88.58
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color_ramp = SubResource("GradientTexture1D_8xl5d")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="RetroExplosion" type="GPUParticles2D"]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_x2vkt")
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_b17us")
+texture = ExtResource("1_30mnm")

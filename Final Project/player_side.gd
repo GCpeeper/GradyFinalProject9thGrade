@@ -123,6 +123,9 @@ func _physics_process(delta):
 		
 	if dir.y < 0 and curstate != State.JUMP:
 		switch_to(State.JUMP)
+		
+	if dir == Vector2.ZERO:
+		switch_to(State.IDLE)
 	
 	move_and_slide()
 	lastdir = dir

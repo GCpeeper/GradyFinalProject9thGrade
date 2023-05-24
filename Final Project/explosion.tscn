@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddo5naqhc2sjj"]
+
+[ext_resource type="Texture2D" uid="uid://cgj86q46m1iyi" path="res://Assets/Particles/Flame.png" id="1_6b864"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bqjb5"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_qa274"]
+offsets = PackedFloat32Array(0, 0.748148, 1)
+colors = PackedColorArray(0.407843, 0.141176, 0.490196, 0.85098, 0.952941, 0.788235, 0.2, 1, 0.129412, 0.145098, 0.137255, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fwv1b"]
+gradient = SubResource("Gradient_qa274")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ir61o"]
+lifetime_randomness = 0.05
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 73.84
+initial_velocity_max = 94.9
+angular_velocity_min = 22.68
+angular_velocity_max = 53.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 47.51
+damping_max = 47.51
+angle_min = -713.4
+angle_max = 720.0
+color = Color(1, 0.729412, 0.231373, 0.709804)
+color_ramp = SubResource("GradientTexture1D_fwv1b")
+hue_variation_min = 0.03
+hue_variation_max = 0.17
+
+[node name="BoomBoom" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_bqjb5")
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_ir61o")
+texture = ExtResource("1_6b864")
+lifetime = 2.0
+explosiveness = 1.0
+fixed_fps = 40

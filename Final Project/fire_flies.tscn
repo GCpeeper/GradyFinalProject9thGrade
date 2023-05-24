@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://dvmbscw6q6k3i"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_aq4u6"]
+blend_mode = 4
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_brgaw"]
+offsets = PackedFloat32Array(0.585185, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 0.490196)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_klgbq"]
+gradient = SubResource("Gradient_brgaw")
+
+[sub_resource type="Curve" id="Curve_kvkd6"]
+bake_resolution = 106
+_data = [Vector2(0, 0.363636), 0.0, 0.0, 0, 0, Vector2(0.289157, 1), 0.0, 0.0, 0, 0, Vector2(0.524096, 0.554545), 0.0, 0.0, 0, 0, Vector2(0.728916, 1), 0.0, 0.0, 0, 0, Vector2(0.981928, 0.363636), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_8t0qd"]
+curve = SubResource("Curve_kvkd6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xu4g8"]
+emission_shape = 3
+emission_box_extents = Vector3(500, 500, 20)
+particle_flag_disable_z = true
+direction = Vector3(4, 4, 0)
+spread = 180.0
+gravity = Vector3(0, 10, 0)
+initial_velocity_min = 41.58
+initial_velocity_max = 41.58
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_min = 2.1
+linear_accel_max = 2.1
+scale_curve = SubResource("CurveTexture_8t0qd")
+color_ramp = SubResource("GradientTexture1D_klgbq")
+turbulence_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_0y1vv"]
+colors = PackedColorArray(0.992157, 0.988235, 0.435294, 1, 0.188235, 0.67451, 0, 0.501961)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_76tvf"]
+gradient = SubResource("Gradient_0y1vv")
+width = 3
+height = 3
+fill = 1
+fill_from = Vector2(0.527523, 0.472477)
+
+[node name="FireFlies" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_aq4u6")
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_xu4g8")
+texture = SubResource("GradientTexture2D_76tvf")
+lifetime = 8.5

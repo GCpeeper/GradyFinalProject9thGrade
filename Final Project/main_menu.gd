@@ -6,5 +6,5 @@ func _ready():
 	pass
 
 func _on_play_pressed():
-	get_tree().change_scene_to_file("res://level_1.tscn")
+	SceneSwitcher.goto_scene("res://level_1.tscn")
 	

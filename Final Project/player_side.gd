@@ -23,6 +23,7 @@ var stab_damage = 5
 var max_jumps = 2
 var curstate = State.IDLE
 var state_time = 0.0
+var health = 100
 
 # Called when the node enters the scene tree for the first time.
 

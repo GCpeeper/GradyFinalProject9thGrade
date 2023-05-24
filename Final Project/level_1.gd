@@ -35,7 +35,7 @@ func _process(delta):
 func _on_door_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body is Charater:
 		body.position = Vector2(710,5)
-		get_tree().change_scene_to_file("res://level_2.tscn")
+		SceneSwitcher.goto_scene("res://level_1.tscn")
 
 
 func _on_red_tree_dead():

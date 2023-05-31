@@ -15,23 +15,23 @@ func _ready():
 func _process(delta):
 	if Input.is_action_pressed("moveup"):
 		up = true
-		$CanvasLayer/VBoxContainer/Up.hide()
+		$Player/Camera2D/VBoxContainer/Up.hide()
 	elif Input.is_action_pressed("movedown"):
 		down = true
-		$CanvasLayer/VBoxContainer/Down.hide()
+		$Player/Camera2D/VBoxContainer/Down.hide()
 	elif Input.is_action_pressed("moveleft"):
 		left = true
-		$CanvasLayer/VBoxContainer/Left.hide()
+		$Player/Camera2D/VBoxContainer/Left.hide()
 	elif Input.is_action_pressed("moveright"):
 		right = true
-		$CanvasLayer/VBoxContainer/Right.hide()
+		$Player/Camera2D/VBoxContainer/Right.hide()
 		
 	if up and down and left and right and tree_dead:
 		done = true
 		$Door.monitoring = true
-		$CanvasLayer/VBoxContainer/Label.text = "Quests complete go through the door"
-		$CanvasLayer/VBoxContainer/Label.show()
-		$VBoxContainer/Quests.hide()
+		$Player/Camera2D/VBoxContainer/Label.text = "Quests complete go through the door"
+		$Player/Camera2D/VBoxContainer/Label.show()
+		$Player/Camera2D/VBoxContainer/Quests.hide()
 	
 
 
@@ -43,7 +43,7 @@ func _on_door_body_shape_entered(body_rid, body, body_shape_index, local_shape_i
 
 func _on_red_tree_dead():
 	tree_dead = true
-	$CanvasLayer/VBoxContainer/Label.hide()
+	$Player/Camera2D/VBoxContainer/Label.hide()
 	
 func save_all():
 	var dict = {}
@@ -96,16 +96,16 @@ func load_all(scene):
 	
 	if tree_dead:
 		$RedTree.queue_free()
-	
+		
 	if done:
 		up = true
 		down = true
 		left = true
 		right = true
-		$CanvasLayer/VBoxContainer/Right.hide()
-		$CanvasLayer/VBoxContainer/Left.hide()
-		$CanvasLayer/VBoxContainer/Up.hide()
-		$CanvasLayer/VBoxContainer/Down.hide()
+		$Player/Camera2D/VBoxContainer/Right.hide()
+		$Player/Camera2D/VBoxContainer/Left.hide()
+		$Player/Camera2D/VBoxContainer/Up.hide()
+		$Player/Camera2D/VBoxContainer/Down.hide()
 	
 	# Add the newly made scene to the tree so it starts showing
 

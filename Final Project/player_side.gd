@@ -8,6 +8,8 @@ const MOVE_VECTORS= {
 	State.JUMP: Vector2(0,-2500)
 }
 const Attacks = ["Attack1","Attack2","Attack3"]
+const DAMAGE = [4,5,6]
+
 var SPEED = 200.0
 var JUMP_VELOCITY = -233.3
 var lastMoveState: State = State.MOVE_RIGHT
@@ -25,6 +27,8 @@ var curstate = State.IDLE
 var state_time = 0.0
 var health = 100
 var attack = Attacks.pick_random()
+var after_hit = 0.5
+
 # Called when the node enters the scene tree for the first time.
 
 func control_set():
@@ -86,6 +90,12 @@ func switch_to(new_state: State):
 			$AnimatedSprite2D.play("Jump")
 			$AnimatedSprite2D.flip_h = true
 
+func _process(delta):
+	if after_hit < 0.5:
+		after_hit +=delta
+		
+	if after_hit > 0.5:
+		modulate = Color.WHITE
 
 func _physics_process(delta):
 	
@@ -189,7 +199,7 @@ func _on_attack_1_body_shape_entered(body_rid, body, body_shape_index, local_sha
 			struck = true
 
 		if body is Enemy and struck:
-			body.hit()
+			body.hit(DAMAGE.pick_random())
 
 
 func _on_attack_2_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
@@ -202,7 +212,7 @@ func _on_attack_2_body_shape_entered(body_rid, body, body_shape_index, local_sha
 			struck = true
 
 		if body is Enemy and struck:
-			body.hit()
+			body.hit(DAMAGE.pick_random())
 
 
 
@@ -217,4 +227,9 @@ func _on_attack_3_body_shape_entered(body_rid, body, body_shape_index, local_sha
 			struck = true
 
 		if body is Enemy and struck:
-			body.hit()
+			body.hit(DAMAGE.pick_random())
+
+func hit(damage):
+	health -= damage
+	modulate = Color.RED
+	after_hit = 0.5

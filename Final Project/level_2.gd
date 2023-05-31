@@ -22,5 +22,5 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 func save_all():
 	pass
 	
-func load_all(scence):
+func load_all(scene):
 	pass

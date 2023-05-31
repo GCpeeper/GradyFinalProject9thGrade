@@ -1,12 +1,12 @@
 extends Enemy
 
-var health = 3
+var health = 15
 var after_hit = 0.5
 
 signal dead
 
-func hit():
-	health -= 1
+func hit(dam):
+	health -= dam
 	if health <= 0:
 		dead.emit()
 		queue_free()

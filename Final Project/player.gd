@@ -8,6 +8,8 @@ const MOVE_VECTORS = {
 	State.MOVE_UP: Vector2(0,-250),
 	State.MOVE_DOWN: Vector2(0,250)
 }
+const DAMAGE = [4,5,6]
+
 
 var curstate = State.IDLE
 var lastMoveState: State = State.MOVE_DOWN
@@ -15,6 +17,7 @@ var lastdir: Vector2 = Vector2.ZERO
 var state_time = 0.0
 var health = 100
 var inside = false
+var after_hit = 0.5
 
 var in_up = false
 var in_down = false
@@ -111,6 +114,12 @@ func update_movement_animation():
 			$AnimatedSprite2D.flip_h = false
 			lastMoveState = State.MOVE_DOWN
 
+func _process(delta):
+	if after_hit < 0.5:
+		after_hit +=delta
+		
+	if after_hit > 0.5:
+		modulate = Color.WHITE
 
 func _physics_process(delta):
 	state_time += delta
@@ -166,7 +175,7 @@ func _on_sword_area_body_shape_entered(body_rid, body, body_shape_index, local_s
 			struck = true
 
 		if body is Enemy and struck:
-			body.hit()
+			body.hit(DAMAGE.pick_random())
 
 
 func _on_sword_area_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
@@ -210,3 +219,8 @@ func load(dict):
 	lastMoveState = dict["lastMoveState"]
 	health = dict["health"]
 	curstate = dict["curstate"]
+	
+func hit(damage):
+	health -= damage
+	modulate = Color.RED
+	after_hit = 0.5

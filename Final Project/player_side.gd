@@ -111,8 +111,10 @@ func _physics_process(delta):
 				dir.x = direction * SPEED
 			if direction < 0 and is_on_floor() and curstate != State.ATTACK:
 				switch_to(State.MOVE_LEFT)
+				lastMoveState = State.MOVE_LEFT
 			elif direction > 0 and is_on_floor() and curstate != State.ATTACK:
 				switch_to(State.MOVE_RIGHT)
+				lastMoveState = State.MOVE_RIGHT
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			dir.y = move_toward(velocity.x, 0, SPEED)
@@ -124,7 +126,7 @@ func _physics_process(delta):
 	if dir.y < 0 and curstate != State.JUMP:
 		switch_to(State.JUMP)
 		
-	if dir == Vector2.ZERO:
+	if dir == Vector2.ZERO and curstate != State.ATTACK and curstate != State.JUMP:
 		switch_to(State.IDLE)
 	
 	move_and_slide()
@@ -139,3 +141,15 @@ func _on_animated_sprite_2d_animation_finished():
 		switch_to(State.DEAD)
 	elif not is_on_floor() and curstate == State.JUMP:
 			switch_to(State.FALLLING)
+
+func save():
+	return {
+		"filename": get_scene_file_path(),
+		"pos_x": position.x,
+		"pos_y": position.y,
+		"state_time": state_time,
+		"lastMoveState": lastMoveState,
+		"lastdir": lastdir,
+		"health": health,
+		"curstate": curstate
+}

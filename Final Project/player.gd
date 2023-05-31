@@ -189,3 +189,15 @@ func _on_animated_sprite_2d_animation_finished():
 		switch_to(State.IDLE)
 	elif curstate == State.DYING:
 		switch_to(State.DEAD)
+
+func save():
+	return {
+		"filename": get_scene_file_path(),
+		"pos_x": position.x,
+		"pos_y": position.y,
+		"state_time": state_time,
+		"lastMoveState": lastMoveState,
+		"lastdir": lastdir,
+		"health": health,
+		"curstate": curstate
+}

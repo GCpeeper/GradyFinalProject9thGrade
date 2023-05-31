@@ -20,3 +20,9 @@ func _process(delta):
 		
 	if after_hit > 0.5:
 		modulate = Color.WHITE
+		
+func load(dict):
+	pass
+
+func save():
+	pass

@@ -5,10 +5,12 @@ extends CanvasLayer
 #from Godot docs
 
 var current_scene = null
+var scenes_saved = []
 
 func _ready():
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
+	scenes_saved = []
 	
 func _process(delta):
 	print(current_scene)
@@ -32,6 +34,8 @@ func _deferred_goto_scene(path):
 	var player_health
 	if current_scene.name != "MainMenu":
 		player_health = current_scene.find_child("Player").health
+		
+	current_scene.save_all()
 	# It is now safe to remove the current scene
 	current_scene.free()
 
@@ -40,7 +44,12 @@ func _deferred_goto_scene(path):
 
 	# Instance the new scene.
 	current_scene = s.instantiate()
-
+	
+	if path in scenes_saved:
+		current_scene.load_all(current_scene)
+	
+	scenes_saved.append(path)
+	
 	if current_scene.name != "MainMenu":
 		current_scene.find_child("Player").health = player_health
 

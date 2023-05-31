@@ -7685,15 +7685,15 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(196601, 2883586, 38, 262137, 2883586, 39, 327673, 2883586, 40, 196602, 2949122, 38, 262138, 2949122, 39, 327674, 2949122, 40)
 
-[node name="FireFlies" parent="TileMap" instance=ExtResource("5_uaqs3")]
-position = Vector2(-9.42857, 42.2857)
-scale = Vector2(0.285714, 0.285714)
-amount = 40
-
 [node name="Player" parent="." instance=ExtResource("2_yojiw")]
 position = Vector2(-46, 114.5)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="FireFlies" parent="Player/Camera2D" instance=ExtResource("5_uaqs3")]
+position = Vector2(29.5, -40.5)
+scale = Vector2(0.499999, 0.499999)
+amount = 40
 
 [node name="Area2D" type="Area2D" parent="."]
 

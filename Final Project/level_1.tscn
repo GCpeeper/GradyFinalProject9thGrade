@@ -22878,36 +22878,6 @@ z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Player/Camera2D"]
-offset_left = -289.0
-offset_top = -162.0
-offset_right = -180.0
-offset_bottom = -49.0
-
-[node name="Quests" type="Label" parent="Player/Camera2D/VBoxContainer"]
-layout_mode = 2
-text = "Quests:"
-
-[node name="Label" type="Label" parent="Player/Camera2D/VBoxContainer"]
-layout_mode = 2
-text = "Kill Red Tree"
-
-[node name="Left" type="Label" parent="Player/Camera2D/VBoxContainer"]
-layout_mode = 2
-text = "Move Left"
-
-[node name="Right" type="Label" parent="Player/Camera2D/VBoxContainer"]
-layout_mode = 2
-text = "Move Right"
-
-[node name="Up" type="Label" parent="Player/Camera2D/VBoxContainer"]
-layout_mode = 2
-text = "Move Up"
-
-[node name="Down" type="Label" parent="Player/Camera2D/VBoxContainer"]
-layout_mode = 2
-text = "Move Down"
-
 [node name="Overworld" type="TileMap" parent="."]
 texture_filter = 1
 scale = Vector2(1.5, 1.5)
@@ -22937,5 +22907,37 @@ position = Vector2(279, -50)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Door"]
 polygon = PackedVector2Array(677, -62, 744, -61, 747, -2, 673, -1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = -578.0
+offset_top = -324.0
+offset_right = -469.0
+offset_bottom = -148.0
+
+[node name="Quests" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Quests:"
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Kill Red Tree"
+
+[node name="Left" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Move Left"
+
+[node name="Right" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Move Right"
+
+[node name="Up" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Move Up"
+
+[node name="Down" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Move Down"
 
 [connection signal="body_shape_entered" from="Door" to="." method="_on_door_body_shape_entered"]

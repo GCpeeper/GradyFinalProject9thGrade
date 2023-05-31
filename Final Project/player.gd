@@ -201,3 +201,12 @@ func save():
 		"health": health,
 		"curstate": curstate
 }
+
+func load(dict):
+	assert(dict["filename"] == get_scene_file_path())
+	position.x = dict["pos_x"]
+	position.y = dict["pos_y"]
+	state_time = dict["state_time"]
+	lastMoveState = dict["lastMoveState"]
+	health = dict["health"]
+	curstate = dict["curstate"]

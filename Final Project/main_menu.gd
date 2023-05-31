@@ -7,4 +7,10 @@ func _ready():
 
 func _on_play_pressed():
 	SceneSwitcher.goto_scene("res://level_1.tscn")
+
+func save_all():
+	pass
+	
+func load_all(scence):
+	pass
 	

@@ -15,29 +15,25 @@ func _ready():
 func _process(delta):
 	if Input.is_action_pressed("moveup"):
 		up = true
-		$Player/Camera2D/VBoxContainer/Up.hide()
+		$CanvasLayer/VBoxContainer/Up.hide()
 	elif Input.is_action_pressed("movedown"):
 		down = true
-		$Player/Camera2D/VBoxContainer/Down.hide()
+		$CanvasLayer/VBoxContainer/Down.hide()
 	elif Input.is_action_pressed("moveleft"):
 		left = true
-		$Player/Camera2D/VBoxContainer/Left.hide()
+		$CanvasLayer/VBoxContainer/Left.hide()
 	elif Input.is_action_pressed("moveright"):
 		right = true
-		$Player/Camera2D/VBoxContainer/Right.hide()
+		$CanvasLayer/VBoxContainer/Right.hide()
 		
 	if up and down and left and right and tree_dead:
 		done = true
 		$Door.monitoring = true
-		$Player/Camera2D/VBoxContainer/Label.text = "Quests complete go through the door"
-		$Player/Camera2D/VBoxContainer/Label.show()
-		$Player/Camera2D/VBoxContainer/Quests.hide()
+		$CanvasLayer/VBoxContainer/Label.text = "Quests complete go through the door"
+		$CanvasLayer/VBoxContainer/Label.show()
+		$VBoxContainer/Quests.hide()
 	
-	if done:
-		up = true
-		down = true
-		left = true
-		right = true
+
 
 func _on_door_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body is Charater:
@@ -47,7 +43,7 @@ func _on_door_body_shape_entered(body_rid, body, body_shape_index, local_shape_i
 
 func _on_red_tree_dead():
 	tree_dead = true
-	$Player/Camera2D/VBoxContainer/Label.hide()
+	$CanvasLayer/VBoxContainer/Label.hide()
 	
 func save_all():
 	var dict = {}
@@ -58,7 +54,7 @@ func save_all():
 		
 	# Save the player node too
 	dict["Player"] = $Player.save()
-	dict["quests"] = save()
+	dict["Level1"] = save()
 	
 	# Write the dictionary as a JSON file
 	# Check the https://docs.godotengine.org/en/4.0/tutorials/io/data_paths.html docs to see
@@ -75,6 +71,11 @@ func save():
 		"done": done,
 		"tree_dead": tree_dead
 	}
+	
+func load_self(dict):
+	assert(dict["filename"] == get_scene_file_path())
+	done = dict["done"]
+	tree_dead = dict["tree_dead"]
 
 func load_all(scene):
 	
@@ -86,11 +87,26 @@ func load_all(scene):
 	var dict = JSON.parse_string(load_file.get_as_text())
 	# Load in node data into our newly made scene
 	for nodename in dict:
-		var node = scene.find_child(nodename)
-		node.load(dict[nodename])
-		print("Loading ", nodename)
-		
+		if nodename != "Level1":
+			var node = scene.find_child(nodename)
+			node.load(dict[nodename])
+			print("Loading ", nodename)
+		elif nodename == "Level1":
+			load_self(dict[nodename])
+	
+	if tree_dead:
+		$RedTree.queue_free()
+	
+	if done:
+		up = true
+		down = true
+		left = true
+		right = true
+		$CanvasLayer/VBoxContainer/Right.hide()
+		$CanvasLayer/VBoxContainer/Left.hide()
+		$CanvasLayer/VBoxContainer/Up.hide()
+		$CanvasLayer/VBoxContainer/Down.hide()
+	
 	# Add the newly made scene to the tree so it starts showing
-	get_tree().get_root().add_child(scene)
 
 	

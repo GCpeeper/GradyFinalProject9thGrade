@@ -24,7 +24,7 @@ var max_jumps = 2
 var curstate = State.IDLE
 var state_time = 0.0
 var health = 100
-
+var attack = Attacks.pick_random()
 # Called when the node enters the scene tree for the first time.
 
 func control_set():
@@ -33,6 +33,10 @@ func control_set():
 func switch_to(new_state: State):
 	curstate = new_state
 	state_time = 0.0
+	$Attack1.monitoring = false
+	$Attack2.monitoring = false
+	$Attack3.monitoring = false
+	attack = Attacks.pick_random()
 	
 	if new_state in MOVE_STATES:
 		#$SwordArea.monitoring = false
@@ -55,11 +59,18 @@ func switch_to(new_state: State):
 	elif new_state == State.ATTACK:
 		#$SwordArea.monitoring = true
 		if lastMoveState == State.MOVE_RIGHT:
-			$AnimatedSprite2D.play(Attacks.pick_random())
+			$AnimatedSprite2D.play(attack)
 			$AnimatedSprite2D.flip_h = false
 		elif lastMoveState == State.MOVE_LEFT:
-			$AnimatedSprite2D.play(Attacks.pick_random())
+			$AnimatedSprite2D.play(attack)
 			$AnimatedSprite2D.flip_h = true
+		
+		if attack == "Attack1":
+			$Attack1.monitoring = true
+		elif attack == "Attack2":
+			$Attack2.monitoring = true
+		elif attack == "Attack3":
+			$Attack3.monitoring = true
 	elif new_state == State.DYING:
 		if lastMoveState == State.MOVE_RIGHT:
 			$AnimatedSprite2D.play("dying")
@@ -141,6 +152,8 @@ func _on_animated_sprite_2d_animation_finished():
 		switch_to(State.DEAD)
 	elif not is_on_floor() and curstate == State.JUMP:
 			switch_to(State.FALLLING)
+			
+
 
 func save():
 	return {
@@ -163,3 +176,45 @@ func load(dict):
 	lastdir = dict["lastdir"]
 	health = dict["health"]
 	curstate = dict["curstate"]
+
+
+func _on_attack_1_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+
+	if curstate == State.ATTACK and body != self:
+		var struck = false
+
+		if lastMoveState == State.MOVE_RIGHT and local_shape_index == 0:
+			struck = true
+		elif lastMoveState == State.MOVE_LEFT and local_shape_index == 1:
+			struck = true
+
+		if body is Enemy and struck:
+			body.hit()
+
+
+func _on_attack_2_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	if curstate == State.ATTACK and body != self:
+		var struck = false
+
+		if lastMoveState == State.MOVE_RIGHT and local_shape_index == 0:
+			struck = true
+		elif lastMoveState == State.MOVE_LEFT and local_shape_index == 1:
+			struck = true
+
+		if body is Enemy and struck:
+			body.hit()
+
+
+
+
+func _on_attack_3_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	if curstate == State.ATTACK and body != self:
+		var struck = false
+
+		if lastMoveState == State.MOVE_RIGHT and local_shape_index == 0:
+			struck = true
+		elif lastMoveState == State.MOVE_LEFT and local_shape_index == 1:
+			struck = true
+
+		if body is Enemy and struck:
+			body.hit()

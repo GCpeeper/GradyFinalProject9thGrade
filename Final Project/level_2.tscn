@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://csvfon4ec7t8i"]
+[gd_scene load_steps=11 format=3 uid="uid://csvfon4ec7t8i"]
 
 [ext_resource type="Texture2D" uid="uid://c34ugr5vn5sm0" path="res://Assets/Pixel Art Platformer Tileset/Platformer Tiles.png" id="1_055ko"]
 [ext_resource type="Script" path="res://level_2.gd" id="1_ow5yb"]
 [ext_resource type="Texture2D" uid="uid://c0g3a8mj6w4hd" path="res://Assets/16x16/CLT_Buildings_winter.png" id="2_x7ukn"]
 [ext_resource type="PackedScene" uid="uid://dj0ymarmmupvr" path="res://player_side.tscn" id="2_yojiw"]
 [ext_resource type="PackedScene" uid="uid://dvmbscw6q6k3i" path="res://fire_flies.tscn" id="5_uaqs3"]
+[ext_resource type="PackedScene" uid="uid://2bo2s12ye1v3" path="res://red_tree_side.tscn" id="6_c6uji"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j8dc4"]
 rough = true
@@ -7699,5 +7700,8 @@ amount = 40
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-140, 55.5, -116.5, 55.5, -116.5, 145, -140.5, 145.5)
+
+[node name="RedTree" parent="." instance=ExtResource("6_c6uji")]
+position = Vector2(397.5, 134.5)
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

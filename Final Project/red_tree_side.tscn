@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://2bo2s12ye1v3"]
+
+[ext_resource type="PackedScene" uid="uid://cwfmy4lfnil4e" path="res://red_tree.tscn" id="1_crmug"]
+
+[node name="RedTree" instance=ExtResource("1_crmug")]
+
+[node name="CollisionPolygon2D" parent="." index="0"]
+polygon = PackedVector2Array(-34, 84, 30, 84, 58, 80, 70, 2, 88, 0, 102, -14, 92, -38, 56, -68, 20, -80, -32, -74, -68, -56, -70, -28, -82, -24, -84, 0, -58, 80)

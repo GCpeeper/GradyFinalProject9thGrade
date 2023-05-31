@@ -338,14 +338,53 @@ animations = [{
 [node name="PlayerSide" type="CharacterBody2D"]
 script = ExtResource("1_hdiav")
 
+[node name="Attack1" type="Area2D" parent="."]
+visible = false
+position = Vector2(1, 0)
+
+[node name="Right" type="CollisionPolygon2D" parent="Attack1"]
+polygon = PackedVector2Array(-5, -15, 3, -19, 11, -19, 16, -17, 21, -12, 23, -6, 23, 2, 22, 5, 15, 13, 3, 13, 0, 13)
+
+[node name="Left" type="CollisionPolygon2D" parent="Attack1"]
+position = Vector2(0, -5)
+rotation = 3.14159
+polygon = PackedVector2Array(-5, -15, 3, -19, 11, -19, 16, -17, 21, -12, 23, -6, 23, 2, 22, 5, 15, 13, 3, 13, 0, 13)
+
+[node name="Attack2" type="Area2D" parent="."]
+visible = false
+
+[node name="Right" type="CollisionPolygon2D" parent="Attack2"]
+polygon = PackedVector2Array(4, -12, -16, 16, -1, 18, 10, 18, 15, 16, 21, 10, 22, 6, 22, -2, 21, -6, 14, -12)
+
+[node name="Left" type="CollisionPolygon2D" parent="Attack2"]
+position = Vector2(-2, 6)
+rotation = 3.14159
+polygon = PackedVector2Array(-16, -12, 3, 18, 10, 18, 15, 16, 21, 10, 22, 6, 22, -2, 21, -6, 14, -12)
+
+[node name="Attack3" type="Area2D" parent="."]
+visible = false
+position = Vector2(1, 0)
+
+[node name="Right" type="CollisionPolygon2D" parent="Attack3"]
+polygon = PackedVector2Array(-6, -5, -5, -3, 13, 3, 15, 4, 15, 6, 4, 11, -5, 11, -16, 7, -25, 10, -24, 12, -14, 15, -14, 15, 10, 15, 19, 13, 22, 12, 24, 9, 24, 4, 9, -3, -3, -6)
+
+[node name="Left" type="CollisionPolygon2D" parent="Attack3"]
+rotation = -3.14159
+polygon = PackedVector2Array(-22, -12, -24, -9, -16, -7, -3, -11, 14, -7, 16, -5, 14, -3, -3, 4, -1, 7, 9, 4, 16, 1, 20, -2, 25, -10, 24, -12, 14, -15, -8, -15)
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(-10, -13, 8, -13, 9, 17, -11, 17)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_rjq4o")
-animation = &"Jump"
+animation = &"Attack3"
 autoplay = "Idle"
+frame = 2
 
+[connection signal="body_shape_entered" from="Attack1" to="." method="_on_attack_1_body_shape_entered"]
+[connection signal="body_shape_entered" from="Attack2" to="." method="_on_attack_2_body_shape_entered"]
+[connection signal="body_shape_entered" from="Attack3" to="." method="_on_attack_3_body_shape_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -1,9 +1,5 @@
 extends Enemy
 
-var health = 15
-var after_hit = 0.5
-
-signal dead
 
 func hit(dam):
 	health -= dam

@@ -366,14 +366,13 @@ visible = false
 position = Vector2(1, 0)
 
 [node name="Right" type="CollisionPolygon2D" parent="Attack3"]
-polygon = PackedVector2Array(-6, -5, -5, -3, 13, 3, 15, 4, 15, 6, 4, 11, -5, 11, -16, 7, -25, 10, -24, 12, -14, 15, -14, 15, 10, 15, 19, 13, 22, 12, 24, 9, 24, 4, 9, -3, -3, -6)
+polygon = PackedVector2Array(-14, 15, -14, 15, 10, 15, 19, 13, 22, 12, 24, 9, 24, 3, -2, -6, -14, -2, -21, 3, -25, 9, -24, 12)
 
 [node name="Left" type="CollisionPolygon2D" parent="Attack3"]
 rotation = -3.14159
-polygon = PackedVector2Array(-22, -12, -24, -9, -16, -7, -3, -11, 14, -7, 16, -5, 14, -3, -3, 4, -1, 7, 9, 4, 16, 1, 20, -2, 25, -10, 24, -12, 14, -15, -8, -15)
+polygon = PackedVector2Array(-22, -12, -24, -9, -24, -5, -21, -2, -16, -1.39876e-06, -6, 4, -4.76837e-07, 6, 9, 4, 16, 1, 20, -2, 25, -10, 24, -12, 14, -15, -8, -15)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
 polygon = PackedVector2Array(-10, -13, 8, -13, 9, 17, -11, 17)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

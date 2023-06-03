@@ -1,6 +1,7 @@
-[gd_scene load_steps=44 format=3 uid="uid://c18cn0ox22vdd"]
+[gd_scene load_steps=45 format=3 uid="uid://c18cn0ox22vdd"]
 
 [ext_resource type="PackedScene" uid="uid://bg01n0wh33mxd" path="res://enemy.tscn" id="1_4bnf8"]
+[ext_resource type="Script" path="res://goblin.gd" id="2_kl80r"]
 [ext_resource type="Texture2D" uid="uid://catnpnvxs2421" path="res://Assets/Enemies/Goblin/Goblin_Attack.png" id="2_wv4kp"]
 [ext_resource type="Texture2D" uid="uid://blgwjw38wjhcc" path="res://Assets/Enemies/Goblin/Goblin_Idle.png" id="3_3e0d1"]
 [ext_resource type="Texture2D" uid="uid://csnq1883hlaup" path="res://Assets/Enemies/Goblin/Goblin_Move.png" id="4_2hqdr"]
@@ -282,7 +283,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Skelly" instance=ExtResource("1_4bnf8")]
+[node name="goblin" instance=ExtResource("1_4bnf8")]
+script = ExtResource("2_kl80r")
 
 [node name="Spear" type="AnimatedSprite2D" parent="." index="0"]
 texture_filter = 1
@@ -300,3 +302,32 @@ autoplay = "Idle"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
 polygon = PackedVector2Array(-4, -12, 11, -12, 11, 16, -4, 16)
+
+[node name="RightTurn" type="Area2D" parent="." index="3"]
+
+[node name="Block" type="CollisionPolygon2D" parent="RightTurn" index="0"]
+polygon = PackedVector2Array(11, 14, 12, 14, 12, -12, 11, -12)
+
+[node name="LeftTurn" type="Area2D" parent="." index="4"]
+
+[node name="Block" type="CollisionPolygon2D" parent="LeftTurn" index="0"]
+polygon = PackedVector2Array(-4, -12, -4, 14, -5, 14, -5, -12)
+
+[node name="RightGround" type="Area2D" parent="." index="5"]
+
+[node name="Ground" type="CollisionPolygon2D" parent="RightGround" index="0"]
+polygon = PackedVector2Array(13, 17, 18, 17, 16, 19)
+
+[node name="LeftGround" type="Area2D" parent="." index="6"]
+
+[node name="Ground" type="CollisionPolygon2D" parent="LeftGround" index="0"]
+polygon = PackedVector2Array(-6, 17, -11, 17, -9, 19)
+
+[connection signal="body_shape_entered" from="RightTurn" to="." method="_on_right_turn_body_shape_entered"]
+[connection signal="body_shape_exited" from="RightTurn" to="." method="_on_right_turn_body_shape_exited"]
+[connection signal="body_shape_entered" from="LeftTurn" to="." method="_on_left_turn_body_shape_entered"]
+[connection signal="body_shape_exited" from="LeftTurn" to="." method="_on_left_turn_body_shape_exited"]
+[connection signal="area_entered" from="RightGround" to="." method="_on_right_ground_area_entered"]
+[connection signal="area_exited" from="RightGround" to="." method="_on_right_ground_area_exited"]
+[connection signal="area_entered" from="LeftGround" to="." method="_on_left_ground_area_entered"]
+[connection signal="area_exited" from="LeftGround" to="." method="_on_left_ground_area_exited"]

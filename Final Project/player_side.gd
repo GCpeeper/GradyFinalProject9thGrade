@@ -89,6 +89,10 @@ func switch_to(new_state: State):
 		elif lastMoveState == State.MOVE_LEFT:
 			$AnimatedSprite2D.play("Jump")
 			$AnimatedSprite2D.flip_h = true
+			
+func _ready():
+	floor_max_angle = 0.82030475
+	wall_min_slide_angle = 0.82030475
 
 func _process(delta):
 	if after_hit < 0.5:

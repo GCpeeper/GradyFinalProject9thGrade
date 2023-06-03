@@ -13,7 +13,7 @@ func _ready():
 	scenes_saved = []
 	
 func _process(delta):
-	print(current_scene)
+	pass
 
 func goto_scene(path):
 	# This function will usually be called from a signal callback,

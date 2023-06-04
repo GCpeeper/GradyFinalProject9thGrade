@@ -1,4 +1,5 @@
-extends Area2D
+class_name Marker extends Area2D
+var player_exited = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,6 +15,9 @@ func _process(delta):
 func _on_body_entered(body):
 	if body is Goblin:
 		body.turn()
+	elif body is Charater and player_exited:
+		body.marker()
+		player_exited = false
 
 func save():
 	pass

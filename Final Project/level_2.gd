@@ -5,20 +5,41 @@ var alive_enemies = []
 var enemies = []
 var nodes = []
 var dead_enemies = []
+var inital_gobs
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	enemies = find_enemies()
 	nodes = find_nodes()
+	inital_gobs = alive_goblins()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print($Player2.position)
 	if $Player2.control == false:
 		SceneSwitcher.goto_scene("res://end.tscn")
+	
+	$Player2/Camera2D/VBoxContainer/Gobs.text = "Goblins Killed: "+str(dead_goblins())+"/"+str(inital_gobs)
+	$Player2/Camera2D/VBoxContainer/Maker.text = "Checkpoints Reached: "+str($Player2.markers_entered)+"/"+str(markers())
+	
+	if dead_goblins() == inital_gobs:
+		$Player2/Camera2D/VBoxContainer/Gobs.hide()
+	if markers() == $Player2.markers_entered:
+		$Player2/Camera2D/VBoxContainer/Maker.hide()
+	if dead_goblins() == inital_gobs and markers() == $Player2.markers_entered:
+		$Player2/Camera2D/VBoxContainer/Quests.text = "Quests complete go through the door to next level"
+	
+func markers():
+	var markers = find_children("*", "Marker")
+	return markers.size()
 
-
-
-
+func dead_goblins():
+	var goblins = find_children("*", "Goblin")
+	return inital_gobs-goblins.size()
+	
+func alive_goblins():
+	var goblins = find_children("*", "Goblin")
+	return goblins.size()
 
 func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body is Charater:
@@ -116,3 +137,9 @@ func find_nodes():
 func _on_child_exiting_tree(node):
 	if node is Enemy:
 		dead_enemies.append(node.name)
+
+
+func _on_area_2d_2_body_entered(body):
+	if body is Charater:
+		body.position = Vector2(-100,120)
+		SceneSwitcher.goto_scene("res://level_1.tscn")

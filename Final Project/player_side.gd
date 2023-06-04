@@ -28,6 +28,10 @@ var state_time = 0.0
 var health = 100
 var attack = Attacks.pick_random()
 var after_hit = 0.5
+var markers_entered = 0
+
+func marker():
+	markers_entered += 1
 
 # Called when the node enters the scene tree for the first time.
 

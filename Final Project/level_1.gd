@@ -17,23 +17,23 @@ func _ready():
 func _process(delta):
 	if Input.is_action_pressed("moveup"):
 		up = true
-		$Player/Camera2D/VBoxContainer/Up.hide()
+		$Player1/Camera2D/VBoxContainer/Up.hide()
 	elif Input.is_action_pressed("movedown"):
 		down = true
-		$Player/Camera2D/VBoxContainer/Down.hide()
+		$Player1/Camera2D/VBoxContainer/Down.hide()
 	elif Input.is_action_pressed("moveleft"):
 		left = true
-		$Player/Camera2D/VBoxContainer/Left.hide()
+		$Player1/Camera2D/VBoxContainer/Left.hide()
 	elif Input.is_action_pressed("moveright"):
 		right = true
-		$Player/Camera2D/VBoxContainer/Right.hide()
+		$Player1/Camera2D/VBoxContainer/Right.hide()
 		
 	if up and down and left and right and tree_dead:
 		done = true
 		$Door.monitoring = true
-		$Player/Camera2D/VBoxContainer/Label.text = "Quests complete go through the door"
-		$Player/Camera2D/VBoxContainer/Label.show()
-		$Player/Camera2D/VBoxContainer/Quests.hide()
+		$Player1/Camera2D/VBoxContainer/Label.text = "Quests complete go through the door"
+		$Player1/Camera2D/VBoxContainer/Label.show()
+		$Player1/Camera2D/VBoxContainer/Quests.hide()
 	
 
 
@@ -45,17 +45,27 @@ func _on_door_body_shape_entered(body_rid, body, body_shape_index, local_shape_i
 
 func _on_red_tree_dead():
 	tree_dead = true
-	$Player/Camera2D/VBoxContainer/Label.hide()
+	$Player1/Camera2D/VBoxContainer/Label.hide()
 	
 func save_all():
 	var dict = {}
+	if not FileAccess.file_exists("user://savegame.json"):
+		print("Error could not load file")
+		return 
+		
+	var load_file = FileAccess.open("user://savegame.json", FileAccess.READ)
+	var start = JSON.parse_string(load_file.get_as_text())
+	# Load in node data into our newly made scene
+	for nodename in start:
+		if nodename not in nodes:
+			dict[nodename] = start[nodename]
 	
 	# Go through each Enemy and save it
 	for child in find_children("*", "Enemy"):
 		dict[child.name] = child.save()
 		
 	# Save the player node too
-	dict["Player"] = $Player.save()
+	dict["Player1"] = $Player1.save()
 	dict["Level1"] = save()
 	
 	# Write the dictionary as a JSON file
@@ -89,7 +99,11 @@ func load_all(scene):
 	var dict = JSON.parse_string(load_file.get_as_text())
 	# Load in node data into our newly made scene
 	for nodename in dict:
-		if nodename in nodes:
+		if nodename == "Player1":
+			var node = scene.find_child("Player1")
+			node.load(dict[nodename])
+			print("Loading ", nodename)
+		elif nodename in nodes:
 			var node = scene.find_child(nodename)
 			node.load(dict[nodename])
 			print("Loading ", nodename)
@@ -104,10 +118,10 @@ func load_all(scene):
 		down = true
 		left = true
 		right = true
-		$Player/Camera2D/VBoxContainer/Right.hide()
-		$Player/Camera2D/VBoxContainer/Left.hide()
-		$Player/Camera2D/VBoxContainer/Up.hide()
-		$Player/Camera2D/VBoxContainer/Down.hide()
+		$Player1/Camera2D/VBoxContainer/Right.hide()
+		$Player1/Camera2D/VBoxContainer/Left.hide()
+		$Player1/Camera2D/VBoxContainer/Up.hide()
+		$Player1/Camera2D/VBoxContainer/Down.hide()
 	
 	# Add the newly made scene to the tree so it starts showing
 

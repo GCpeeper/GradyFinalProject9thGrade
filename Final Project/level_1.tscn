@@ -22873,39 +22873,39 @@ sources/8 = SubResource("TileSetAtlasSource_h0j47")
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_f56in")
 
-[node name="Player" parent="." instance=ExtResource("1_m427k")]
+[node name="Player1" parent="." instance=ExtResource("1_m427k")]
 z_index = 1
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="Player1"]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Player/Camera2D"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Player1/Camera2D"]
 z_index = 9
 offset_left = -289.0
 offset_top = -162.0
 offset_right = -180.0
 offset_bottom = 14.0
 
-[node name="Quests" type="Label" parent="Player/Camera2D/VBoxContainer"]
+[node name="Quests" type="Label" parent="Player1/Camera2D/VBoxContainer"]
 layout_mode = 2
 text = "Quests:"
 
-[node name="Label" type="Label" parent="Player/Camera2D/VBoxContainer"]
+[node name="Label" type="Label" parent="Player1/Camera2D/VBoxContainer"]
 layout_mode = 2
 text = "Kill Red Tree"
 
-[node name="Left" type="Label" parent="Player/Camera2D/VBoxContainer"]
+[node name="Left" type="Label" parent="Player1/Camera2D/VBoxContainer"]
 layout_mode = 2
 text = "Move Left"
 
-[node name="Right" type="Label" parent="Player/Camera2D/VBoxContainer"]
+[node name="Right" type="Label" parent="Player1/Camera2D/VBoxContainer"]
 layout_mode = 2
 text = "Move Right"
 
-[node name="Up" type="Label" parent="Player/Camera2D/VBoxContainer"]
+[node name="Up" type="Label" parent="Player1/Camera2D/VBoxContainer"]
 layout_mode = 2
 text = "Move Up"
 
-[node name="Down" type="Label" parent="Player/Camera2D/VBoxContainer"]
+[node name="Down" type="Label" parent="Player1/Camera2D/VBoxContainer"]
 layout_mode = 2
 text = "Move Down"
 

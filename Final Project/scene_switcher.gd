@@ -33,7 +33,10 @@ func goto_scene(path):
 func _deferred_goto_scene(path):
 	var player_health
 	if current_scene.name != "MainMenu" and current_scene.name != "YouLost":
-		player_health = current_scene.find_child("Player").health
+		if current_scene.name == "Level1":
+			player_health = current_scene.find_child("Player1").health
+		elif current_scene.name == "Level2":
+			player_health = current_scene.find_child("Player2").health
 		
 	current_scene.save_all()
 	# It is now safe to remove the current scene
@@ -51,7 +54,10 @@ func _deferred_goto_scene(path):
 	scenes_saved.append(path)
 	
 	if current_scene.name != "MainMenu" and current_scene.name != "YouLost":
-		current_scene.find_child("Player").health = player_health
+		if current_scene.name == "Level1":
+			current_scene.find_child("Player1").health = player_health
+		elif current_scene.name == "Level2":
+			current_scene.find_child("Player2").health = player_health
 
 	# Add it to the active scene, as child of root.
 	get_tree().root.add_child(current_scene)

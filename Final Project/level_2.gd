@@ -4,6 +4,7 @@ var done = false
 var alive_enemies = []
 var enemies = []
 var nodes = []
+var dead_enemies = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	enemies = find_enemies()
@@ -12,7 +13,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if $Player.control == false:
+	if $Player2.control == false:
 		SceneSwitcher.goto_scene("res://end.tscn")
 
 
@@ -26,13 +27,23 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 
 func save_all():
 	var dict = {}
+	if not FileAccess.file_exists("user://savegame.json"):
+		print("Error could not load file")
+		return 
+		
+	var load_file = FileAccess.open("user://savegame.json", FileAccess.READ)
+	var start = JSON.parse_string(load_file.get_as_text())
+	# Load in node data into our newly made scene
+	for nodename in start:
+		if nodename not in nodes:
+			dict[nodename] = start[nodename]
 	
 	# Go through each Enemy and save it
 	for child in find_children("*", "Enemy"):
 		dict[child.name] = child.save()
 		
 	# Save the player node too
-	dict["Player"] = $Player.save()
+	dict["Player2"] = $Player2.save()
 	dict["Level2"] = save()
 	
 	# Write the dictionary as a JSON file
@@ -54,23 +65,18 @@ func load_all(scene):
 	var dict = JSON.parse_string(load_file.get_as_text())
 	# Load in node data into our newly made scene
 	for nodename in dict:
-		if nodename in nodes:
+		if nodename == "Player2":
+			var node = scene.find_child("Player2")
+			node.load(dict[nodename])
+			print("Loading ", nodename)
+		elif nodename in nodes:
 			var node = scene.find_child(nodename)
 			node.load(dict[nodename])
 			print("Loading ", nodename)
 		elif nodename == "Level2":
 			load_self(dict[nodename])
 	
-	if tree_dead:
-		$RedTree.queue_free()
-	var i = 0
-	var to_kill = enemies
-	for name in alive_enemies:
-		if name in to_kill:
-			to_kill.remove_at(i)
-		i += 1
-	
-	for name in to_kill:
+	for name in dead_enemies:
 		find_child(name).queue_free()
 	
 func save():
@@ -78,7 +84,8 @@ func save():
 		"filename": get_scene_file_path(),
 		"done": done,
 		"tree_dead": tree_dead,
-		"alive_enemies": find_enemies()
+		"alive_enemies": find_enemies(),
+		"dead_enemies": dead_enemies
 	}
 	
 func load_self(dict):
@@ -86,6 +93,7 @@ func load_self(dict):
 	done = dict["done"]
 	tree_dead = dict["tree_dead"]
 	alive_enemies = dict["alive_enemies"]
+	dead_enemies = dict["dead_enemies"]
 
 
 func _on_red_tree_dead():
@@ -103,3 +111,8 @@ func find_nodes():
 	for child in find_children("*", "Node"):
 		found.append(child.name)
 	return found
+
+
+func _on_child_exiting_tree(node):
+	if node is Enemy:
+		dead_enemies.append(node.name)

@@ -93,6 +93,7 @@ func switch_to(new_state: State):
 func _ready():
 	floor_max_angle = 0.82030475
 	wall_min_slide_angle = 0.82030475
+	health = 100
 
 func _process(delta):
 	if after_hit < 0.5:
@@ -107,7 +108,9 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 		dir.y += gravity * delta
 	
-
+	if health < 0:
+		switch_to(State.DYING)
+		control = false
 	
 	if is_on_floor():
 		if curstate == State.FALLLING or curstate == State.JUMP:
@@ -145,18 +148,18 @@ func _physics_process(delta):
 			dir.y = move_toward(velocity.x, 0, SPEED)
 		
 			
-	if is_on_floor():
-		jumps = 0
+		if is_on_floor():
+			jumps = 0
+			
+		if dir.y < 0 and curstate != State.JUMP:
+			switch_to(State.JUMP)
+			
+		if dir == Vector2.ZERO and curstate != State.ATTACK and curstate != State.JUMP:
+			switch_to(State.IDLE)
 		
-	if dir.y < 0 and curstate != State.JUMP:
-		switch_to(State.JUMP)
-		
-	if dir == Vector2.ZERO and curstate != State.ATTACK and curstate != State.JUMP:
-		switch_to(State.IDLE)
-	
-	move_and_slide()
-	lastdir = dir
-	dir *= 0
+		move_and_slide()
+		lastdir = dir
+		dir *= 0
 
 
 func _on_animated_sprite_2d_animation_finished():
@@ -187,7 +190,6 @@ func load(dict):
 	position.y = dict["pos_y"]
 	state_time = dict["state_time"]
 	lastMoveState = dict["lastMoveState"]
-	lastdir = dict["lastdir"]
 	health = dict["health"]
 	curstate = dict["curstate"]
 
@@ -235,5 +237,5 @@ func _on_attack_3_body_shape_entered(body_rid, body, body_shape_index, local_sha
 
 func hit(damage):
 	health -= damage
-	modulate = Color.RED
-	after_hit = 0.5
+	self.modulate = Color.RED
+	after_hit = 0

@@ -332,7 +332,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"dying",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [node name="PlayerSide" type="CharacterBody2D"]
@@ -379,9 +379,8 @@ polygon = PackedVector2Array(-10, -13, 8, -13, 9, 17, -11, 17)
 texture_filter = 1
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_rjq4o")
-animation = &"Attack3"
+animation = &"dying"
 autoplay = "Idle"
-frame = 2
 
 [connection signal="body_shape_entered" from="Attack1" to="." method="_on_attack_1_body_shape_entered"]
 [connection signal="body_shape_entered" from="Attack2" to="." method="_on_attack_2_body_shape_entered"]

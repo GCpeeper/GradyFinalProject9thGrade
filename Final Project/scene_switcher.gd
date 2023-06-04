@@ -32,7 +32,7 @@ func goto_scene(path):
 
 func _deferred_goto_scene(path):
 	var player_health
-	if current_scene.name != "MainMenu":
+	if current_scene.name != "MainMenu" and current_scene.name != "YouLost":
 		player_health = current_scene.find_child("Player").health
 		
 	current_scene.save_all()
@@ -50,7 +50,7 @@ func _deferred_goto_scene(path):
 	
 	scenes_saved.append(path)
 	
-	if current_scene.name != "MainMenu":
+	if current_scene.name != "MainMenu" and current_scene.name != "YouLost":
 		current_scene.find_child("Player").health = player_health
 
 	# Add it to the active scene, as child of root.

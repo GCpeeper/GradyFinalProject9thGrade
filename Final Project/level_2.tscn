@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://csvfon4ec7t8i"]
+[gd_scene load_steps=13 format=3 uid="uid://csvfon4ec7t8i"]
 
 [ext_resource type="Texture2D" uid="uid://c34ugr5vn5sm0" path="res://Assets/Pixel Art Platformer Tileset/Platformer Tiles.png" id="1_055ko"]
 [ext_resource type="Script" path="res://level_2.gd" id="1_ow5yb"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dvmbscw6q6k3i" path="res://fire_flies.tscn" id="5_uaqs3"]
 [ext_resource type="PackedScene" uid="uid://2bo2s12ye1v3" path="res://red_tree_side.tscn" id="6_c6uji"]
 [ext_resource type="PackedScene" uid="uid://c18cn0ox22vdd" path="res://goblin.tscn" id="7_irq8t"]
+[ext_resource type="PackedScene" uid="uid://djl2ek1ghqha5" path="res://marker.tscn" id="8_lpv0d"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j8dc4"]
 rough = true
@@ -7669,7 +7670,7 @@ physics_layer_0/physics_material = SubResource("PhysicsMaterial_j8dc4")
 sources/0 = SubResource("TileSetAtlasSource_rv1ns")
 sources/2 = SubResource("TileSetAtlasSource_ahhr6")
 
-[node name="Level 2" type="Node2D"]
+[node name="Level2" type="Node2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_ow5yb")
 
@@ -7708,4 +7709,35 @@ position = Vector2(397.5, 134.5)
 [node name="goblin2" parent="." instance=ExtResource("7_irq8t")]
 position = Vector2(189.5, 155)
 
+[node name="goblin3" parent="." instance=ExtResource("7_irq8t")]
+position = Vector2(506, 125.5)
+
+[node name="goblin4" parent="." instance=ExtResource("7_irq8t")]
+position = Vector2(759, -21)
+
+[node name="goblin5" parent="." instance=ExtResource("7_irq8t")]
+position = Vector2(1169.5, 134.5)
+
+[node name="Marker2" parent="." instance=ExtResource("8_lpv0d")]
+position = Vector2(348.5, 115)
+
+[node name="Marker5" parent="." instance=ExtResource("8_lpv0d")]
+position = Vector2(463, 113)
+
+[node name="Marker4" parent="." instance=ExtResource("8_lpv0d")]
+position = Vector2(643.5, -37.5)
+
+[node name="Marker6" parent="." instance=ExtResource("8_lpv0d")]
+position = Vector2(883.5, -59)
+
+[node name="Marker7" parent="." instance=ExtResource("8_lpv0d")]
+position = Vector2(1071.5, 58)
+
+[node name="Marker8" parent="." instance=ExtResource("8_lpv0d")]
+position = Vector2(1314, 138.5)
+
+[node name="Marker3" parent="." instance=ExtResource("8_lpv0d")]
+position = Vector2(79, 84)
+
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="dead" from="RedTree" to="." method="_on_red_tree_dead"]

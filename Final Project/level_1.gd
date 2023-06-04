@@ -6,11 +6,13 @@ var right = false
 var up = false
 var down = false
 var tree_dead = false
+var nodes = []
 
 func _ready():
 	$Door.monitoring = false
 	var red_tree = get_node("RedTree")
 	red_tree.dead.connect(_on_red_tree_dead)
+	nodes = find_nodes()
 	
 func _process(delta):
 	if Input.is_action_pressed("moveup"):
@@ -87,7 +89,7 @@ func load_all(scene):
 	var dict = JSON.parse_string(load_file.get_as_text())
 	# Load in node data into our newly made scene
 	for nodename in dict:
-		if nodename != "Level1":
+		if nodename in nodes:
 			var node = scene.find_child(nodename)
 			node.load(dict[nodename])
 			print("Loading ", nodename)
@@ -109,4 +111,8 @@ func load_all(scene):
 	
 	# Add the newly made scene to the tree so it starts showing
 
-	
+func find_nodes():
+	var found = []
+	for child in find_children("*", "Node"):
+		found.append(child.name)
+	return found

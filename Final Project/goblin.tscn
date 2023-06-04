@@ -291,13 +291,11 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_3r61i")
 animation = &"Attack"
 autoplay = "Idle"
-frame = 7
-frame_progress = 1.0
 
 [node name="Dagger" type="AnimatedSprite2D" parent="." index="1"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_pr7hm")
-animation = &"Idle"
+animation = &"Move"
 autoplay = "Idle"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
@@ -306,28 +304,24 @@ polygon = PackedVector2Array(-4, -12, 11, -12, 11, 16, -4, 16)
 [node name="RightTurn" type="Area2D" parent="." index="3"]
 
 [node name="Block" type="CollisionPolygon2D" parent="RightTurn" index="0"]
-polygon = PackedVector2Array(11, 14, 12, 14, 12, -12, 11, -12)
+polygon = PackedVector2Array(11, 15, 12, 15, 12, -12, 11, -12)
 
 [node name="LeftTurn" type="Area2D" parent="." index="4"]
 
 [node name="Block" type="CollisionPolygon2D" parent="LeftTurn" index="0"]
-polygon = PackedVector2Array(-4, -12, -4, 14, -5, 14, -5, -12)
+polygon = PackedVector2Array(-4, -12, -4, 15, -5, 15, -5, -12)
 
-[node name="RightGround" type="Area2D" parent="." index="5"]
+[node name="AttackArea" type="Area2D" parent="." index="5"]
 
-[node name="Ground" type="CollisionPolygon2D" parent="RightGround" index="0"]
-polygon = PackedVector2Array(13, 17, 18, 17, 16, 19)
+[node name="Left" type="CollisionPolygon2D" parent="AttackArea" index="0"]
+polygon = PackedVector2Array(-31, 1, -5, 1, -5, 11, -22, 11, -31, 6)
 
-[node name="LeftGround" type="Area2D" parent="." index="6"]
+[node name="Right" type="CollisionPolygon2D" parent="AttackArea" index="1"]
+position = Vector2(36, 0)
+polygon = PackedVector2Array(-31, 1, -5, 1, -5, 6, -14, 11, -31, 11)
 
-[node name="Ground" type="CollisionPolygon2D" parent="LeftGround" index="0"]
-polygon = PackedVector2Array(-6, 17, -11, 17, -9, 19)
-
+[connection signal="animation_finished" from="Spear" to="." method="_on_spear_animation_finished"]
+[connection signal="animation_finished" from="Dagger" to="." method="_on_dagger_animation_finished"]
 [connection signal="body_shape_entered" from="RightTurn" to="." method="_on_right_turn_body_shape_entered"]
-[connection signal="body_shape_exited" from="RightTurn" to="." method="_on_right_turn_body_shape_exited"]
 [connection signal="body_shape_entered" from="LeftTurn" to="." method="_on_left_turn_body_shape_entered"]
-[connection signal="body_shape_exited" from="LeftTurn" to="." method="_on_left_turn_body_shape_exited"]
-[connection signal="area_entered" from="RightGround" to="." method="_on_right_ground_area_entered"]
-[connection signal="area_exited" from="RightGround" to="." method="_on_right_ground_area_exited"]
-[connection signal="area_entered" from="LeftGround" to="." method="_on_left_ground_area_entered"]
-[connection signal="area_exited" from="LeftGround" to="." method="_on_left_ground_area_exited"]
+[connection signal="body_shape_entered" from="AttackArea" to="." method="_on_attack_area_body_shape_entered"]

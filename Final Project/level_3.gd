@@ -10,8 +10,9 @@ func _ready():
 		randList.append(genRandPos())
 
 func _physics_process(delta):
-	var new_bomb = bomb.instantiate()
-	new_bomb.position = randList.pick_random()
+	for i in range(20):
+		var new_bomb = bomb.instantiate()
+		new_bomb.position = Vector2(0,0)
 
 func genRandPos():
 	var minX = -577

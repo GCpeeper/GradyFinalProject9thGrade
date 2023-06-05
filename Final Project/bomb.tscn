@@ -15,17 +15,19 @@ height = 190.0
 script = ExtResource("1_pud2t")
 
 [node name="BoomBoom" parent="." instance=ExtResource("2_6mqcj")]
+visible = false
 randomness = 0.26
 
 [node name="BombArea" type="Area2D" parent="BoomBoom"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoomBoom/BombArea"]
 shape = SubResource("CircleShape2D_15iff")
 
 [node name="Flame" parent="." instance=ExtResource("3_dkjs3")]
-visible = false
 
 [node name="FlameArea" type="Area2D" parent="Flame"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flame/FlameArea"]
 position = Vector2(-5, -52)

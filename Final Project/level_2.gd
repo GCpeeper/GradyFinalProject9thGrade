@@ -141,5 +141,5 @@ func _on_child_exiting_tree(node):
 
 func _on_area_2d_2_body_entered(body):
 	if body is Charater:
-		body.position = Vector2(-100,120)
+		body.position = Vector2(1693.309, 241.962)
 		SceneSwitcher.goto_scene("res://level_1.tscn")

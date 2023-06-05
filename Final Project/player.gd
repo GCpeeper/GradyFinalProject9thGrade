@@ -24,6 +24,9 @@ var in_down = false
 var in_right = false
 var in_left = false
 
+var burning = false
+var damageOverTime = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimatedSprite2D.play("stand_down")
@@ -146,6 +149,9 @@ func _physics_process(delta):
 			switch_to(State.IDLE)
 		elif Input.is_action_just_released("moveright"):
 			switch_to(State.IDLE)
+	
+	if burning:
+		hit(damageOverTime*delta)
 		
 
 
@@ -224,3 +230,10 @@ func hit(damage):
 	health -= damage
 	modulate = Color.RED
 	after_hit = 0.5
+
+func burn(damOverTime):
+	damageOverTime = damOverTime
+	burning = true
+
+func stop_burn():
+	burning = false

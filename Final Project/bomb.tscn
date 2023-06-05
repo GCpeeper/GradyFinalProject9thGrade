@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ce378xttprwwb"]
+
+[ext_resource type="Script" path="res://Bomb.gd" id="1_pud2t"]
+[ext_resource type="PackedScene" uid="uid://ddo5naqhc2sjj" path="res://explosion.tscn" id="2_6mqcj"]
+[ext_resource type="PackedScene" uid="uid://dd1g7b8immyvw" path="res://flame.tscn" id="3_dkjs3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_15iff"]
+radius = 138.058
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ui50"]
+radius = 64.0
+height = 190.0
+
+[node name="Bomb" type="Node2D"]
+script = ExtResource("1_pud2t")
+
+[node name="BoomBoom" parent="." instance=ExtResource("2_6mqcj")]
+emitting = false
+one_shot = true
+randomness = 0.26
+
+[node name="BombArea" type="Area2D" parent="BoomBoom"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoomBoom/BombArea"]
+shape = SubResource("CircleShape2D_15iff")
+
+[node name="Flame" parent="." instance=ExtResource("3_dkjs3")]
+visible = false
+
+[node name="FlameArea" type="Area2D" parent="Flame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flame/FlameArea"]
+position = Vector2(-5, -52)
+shape = SubResource("CapsuleShape2D_8ui50")
+
+[connection signal="body_entered" from="BoomBoom/BombArea" to="." method="_on_bomb_area_body_entered"]
+[connection signal="body_entered" from="Flame/FlameArea" to="." method="_on_flame_area_body_entered"]
+[connection signal="body_exited" from="Flame/FlameArea" to="." method="_on_flame_area_body_exited"]

@@ -15,8 +15,6 @@ height = 190.0
 script = ExtResource("1_pud2t")
 
 [node name="BoomBoom" parent="." instance=ExtResource("2_6mqcj")]
-emitting = false
-one_shot = true
 randomness = 0.26
 
 [node name="BombArea" type="Area2D" parent="BoomBoom"]

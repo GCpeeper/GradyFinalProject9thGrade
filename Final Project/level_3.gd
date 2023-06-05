@@ -2,15 +2,16 @@ extends Node2D
 
 var summonArea = [Vector2(767,-358),Vector2(780,529),Vector2(-539,499),Vector2(-577,-49),Vector2(-329,-359)]
 var randGen = RandomNumberGenerator.new()
+var randList = []
+var bomb = preload("res://bomb.tscn")
 
 func _ready():
-	pass
+	for i in range(100):
+		randList.append(genRandPos())
 
 func _physics_process(delta):
-	var bomb = load("res://bomb.tscn")
-	var new_instance = bomb.instance()
-	add_child(new_instance) 
-	new_instance.position = genRandPos()
+	var new_bomb = bomb.instantiate()
+	new_bomb.position = randList.pick_random()
 
 func genRandPos():
 	var minX = -577

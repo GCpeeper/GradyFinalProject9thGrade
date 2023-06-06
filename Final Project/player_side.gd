@@ -222,7 +222,7 @@ func _on_attack_2_body_shape_entered(body_rid, body, body_shape_index, local_sha
 			struck = true
 
 		if body is Enemy and struck:
-			body.hit(DAMAGE.pick_random())
+			body.hit(DAMAGE.pick_random(),self)
 
 
 

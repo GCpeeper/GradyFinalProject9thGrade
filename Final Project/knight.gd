@@ -1,10 +1,12 @@
-extends EnemyTopDown
+class_name Knight extends EnemyTopDown
 
 const HIT_STATES = [State.HIT_DOWN,State.HIT_LEFT,State.HIT_RIGHT,State.HIT_UP]
 const DAMAGE = [30,29,28,29,30,30,31,32,33,34,35,31,30,29]
 var lastMoveState = null
 var lastHealth
 var justRevived = false
+
+signal died
 
 func hit(dam,hitter):
 	health -= dam
@@ -73,6 +75,7 @@ func switch_to(new_state: State):
 		lastHealth = health
 		$AnimatedSprite2D.play_backwards("death")
 	elif new_state == State.DEAD:
+		died.emit()
 		justRevived = true
 		$AnimatedSprite2D.hide()
 		$CollisionShape2D.disabled = true
@@ -133,9 +136,7 @@ func _physics_process(delta):
 		collided = move_and_collide(MOVE_VECTORS[curstate]*delta)
 	
 	if collided:
-		var turn
-		while not turn:
-			turn = switch_to(MOVE_STATES.pick_random())
+		turn()
 	
 	if curstate == State.DEAD and state_time > 3:
 		switch_to(State.REVIVING)
@@ -151,7 +152,10 @@ func _on_animated_sprite_2d_animation_finished():
 	else:
 		update_animation()
 	
-
+func turn():
+	var turn
+	while not turn and curstate != State.DYING:
+		turn = switch_to(MOVE_STATES.pick_random())
 
 
 func _on_hit_area_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):

@@ -18,6 +18,8 @@ func _on_body_entered(body):
 	elif body is Charater and player_exited:
 		body.marker()
 		player_exited = false
+	elif body is Knight:
+		body.turn()
 
 func save():
 	pass

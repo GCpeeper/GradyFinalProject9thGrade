@@ -155,7 +155,7 @@ func _on_attack_area_body_shape_entered(body_rid, body, body_shape_index, local_
 	
 	if curstate == State.HIT and body != self and body != TileMap:
 		if body is Charater:
-			body.hit(DAMAGE.pick_random())
+			body.hit(DAMAGE.pick_random(),self)
 
 
 func _on_dagger_animation_finished():

@@ -23,6 +23,7 @@ var in_up = false
 var in_down = false
 var in_right = false
 var in_left = false
+var control = true
 
 var burning = false
 var damageOverTime = 0
@@ -126,31 +127,34 @@ func _process(delta):
 func _physics_process(delta):
 	state_time += delta
 	
-	if Input.is_action_just_pressed("attack"):
-		switch_to(State.ATTACK)
-	elif Input.is_action_pressed("moveup") and curstate != State.ATTACK:
-		switch_to(State.MOVE_UP)
-	elif Input.is_action_pressed("movedown") and curstate != State.ATTACK:
-		switch_to(State.MOVE_DOWN)
-	elif Input.is_action_pressed("moveleft") and curstate != State.ATTACK:
-		switch_to(State.MOVE_LEFT)
-	elif Input.is_action_pressed("moveright") and curstate != State.ATTACK:
-		switch_to(State.MOVE_RIGHT)
-	
-	
-	if curstate in MOVE_STATES:
-		var collided = move_and_collide(MOVE_VECTORS[curstate]*delta)
-		if Input.is_action_just_released("moveup"):
-			switch_to(State.IDLE)
-		elif Input.is_action_just_released("movedown"):
-			switch_to(State.IDLE)
-		elif Input.is_action_just_released("moveleft"):
-			switch_to(State.IDLE)
-		elif Input.is_action_just_released("moveright"):
-			switch_to(State.IDLE)
-	
-	if burning:
-		hit(damageOverTime*delta,self)
+	if control:
+		if Input.is_action_just_pressed("attack"):
+			switch_to(State.ATTACK)
+		elif Input.is_action_pressed("moveup") and curstate != State.ATTACK:
+			switch_to(State.MOVE_UP)
+		elif Input.is_action_pressed("movedown") and curstate != State.ATTACK:
+			switch_to(State.MOVE_DOWN)
+		elif Input.is_action_pressed("moveleft") and curstate != State.ATTACK:
+			switch_to(State.MOVE_LEFT)
+		elif Input.is_action_pressed("moveright") and curstate != State.ATTACK:
+			switch_to(State.MOVE_RIGHT)
+		
+		
+		if curstate in MOVE_STATES:
+			var collided = move_and_collide(MOVE_VECTORS[curstate]*delta)
+			if Input.is_action_just_released("moveup"):
+				switch_to(State.IDLE)
+			elif Input.is_action_just_released("movedown"):
+				switch_to(State.IDLE)
+			elif Input.is_action_just_released("moveleft"):
+				switch_to(State.IDLE)
+			elif Input.is_action_just_released("moveright"):
+				switch_to(State.IDLE)
+		
+		if burning:
+			hit(damageOverTime*delta,self)
+	else:
+		switch_to(State.IDLE)
 		
 
 
@@ -229,6 +233,8 @@ func hit(damage,hitter):
 	health -= damage
 	modulate = Color.RED
 	after_hit = 0
+	if health < 0:
+		control = false
 
 func burn(damOverTime):
 	damageOverTime = damOverTime
@@ -236,3 +242,6 @@ func burn(damOverTime):
 
 func stop_burn():
 	burning = false
+
+func marker():
+	pass

@@ -1,7 +1,7 @@
 extends Enemy
 
 
-func hit(dam):
+func hit(dam,hitter):
 	health -= dam
 	if health <= 0:
 		dead.emit()

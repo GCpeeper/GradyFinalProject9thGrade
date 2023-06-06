@@ -6,7 +6,7 @@ var after_hit = 0.5
 
 signal dead
 
-func hit(dam):
+func hit(dam,hitter):
 	health -= dam
 	if health <= 0:
 		dead.emit()

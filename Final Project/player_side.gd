@@ -209,7 +209,7 @@ func _on_attack_1_body_shape_entered(body_rid, body, body_shape_index, local_sha
 			struck = true
 
 		if body is Enemy and struck:
-			body.hit(DAMAGE.pick_random())
+			body.hit(DAMAGE.pick_random(),self)
 
 
 func _on_attack_2_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
@@ -237,9 +237,9 @@ func _on_attack_3_body_shape_entered(body_rid, body, body_shape_index, local_sha
 			struck = true
 
 		if body is Enemy and struck:
-			body.hit(DAMAGE.pick_random())
+			body.hit(DAMAGE.pick_random(),self)
 
-func hit(damage):
+func hit(damage,hitter):
 	health -= damage
 	self.modulate = Color.RED
 	after_hit = 0

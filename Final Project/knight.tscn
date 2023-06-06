@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvtikijmnmhfo"]
+
+[ext_resource type="PackedScene" uid="uid://7wr6jo1agu83" path="res://enemy_top_down.tscn" id="1_e31b6"]
+[ext_resource type="Script" path="res://knight.gd" id="2_1l23f"]
+[ext_resource type="SpriteFrames" uid="uid://c1c8blukff1yc" path="res://Assets/Enemies/knight.tres" id="2_tfi23"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qv3a"]
+size = Vector2(27, 13)
+
+[node name="Knight" instance=ExtResource("1_e31b6")]
+script = ExtResource("2_1l23f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+texture_filter = 1
+sprite_frames = ExtResource("2_tfi23")
+animation = &"slash_up"
+frame = 1
+
+[node name="HitArea" type="Area2D" parent="." index="1"]
+
+[node name="Down" type="CollisionPolygon2D" parent="HitArea" index="0"]
+visible = false
+polygon = PackedVector2Array(14, -10, -13, 7, -13, 23, -5, 32, 5, 32, 14, 23)
+
+[node name="Left" type="CollisionPolygon2D" parent="HitArea" index="1"]
+visible = false
+polygon = PackedVector2Array(-4, 7, -8, -9, -17, -16, -22, -16, -30, -10, -32, -6, -32, 3, -23, 11, -12, 11)
+
+[node name="Right" type="CollisionPolygon2D" parent="HitArea" index="2"]
+visible = false
+polygon = PackedVector2Array(4, 6, 10, -9, 17, -16, 22, -16, 30, -10, 32, -6, 32, 4, 23, 11, 13, 11)
+
+[node name="Up" type="CollisionPolygon2D" parent="HitArea" index="3"]
+visible = false
+polygon = PackedVector2Array(-16, 8, -16, -18, -13, -25, -5, -31, 5, -31, 12, -26, 13, -22, 13, -9, 11, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+position = Vector2(-0.5, 8.5)
+shape = SubResource("RectangleShape2D_2qv3a")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_shape_entered" from="HitArea" to="." method="_on_hit_area_body_shape_entered"]

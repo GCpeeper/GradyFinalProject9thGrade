@@ -1,12 +1,12 @@
 [gd_scene load_steps=14 format=3 uid="uid://b6ajuad1h6rrq"]
 
-[ext_resource type="Script" path="res://level_3.gd" id="1_ywdc3"]
 [ext_resource type="PackedScene" uid="uid://cqluha5xkjhyg" path="res://player.tscn" id="2_luy1r"]
 [ext_resource type="Texture2D" uid="uid://blyh4jimr6np6" path="res://Assets/rpgoverworldtileset_V2/rpg-overworld-tileset v1.2 (wonderdot)/Overworld_Tileset.png" id="3_n5bl7"]
 [ext_resource type="Texture2D" uid="uid://df7174tb3yver" path="res://Assets/rpgoverworldtileset_V2/rpg-overworld-tileset v1.2 (wonderdot)/TropicalExtras_Tileset.png" id="4_q3577"]
 [ext_resource type="Texture2D" uid="uid://s3onkvla7b33" path="res://Assets/rpgoverworldtileset_V2/tileB_japan_outside2.png" id="5_tt7dy"]
 [ext_resource type="Texture2D" uid="uid://d3wc55b6xyv4y" path="res://Assets/rpgoverworldtileset_V2/tileB_japan_buildings.png" id="6_7csxj"]
 [ext_resource type="Texture2D" uid="uid://c0g3a8mj6w4hd" path="res://Assets/16x16/CLT_Buildings_winter.png" id="7_682pg"]
+[ext_resource type="PackedScene" uid="uid://cvtikijmnmhfo" path="res://knight.tscn" id="7_srr7x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ttrq2"]
 texture = ExtResource("3_n5bl7")
@@ -17246,8 +17246,7 @@ sources/2 = SubResource("TileSetAtlasSource_doj3l")
 sources/3 = SubResource("TileSetAtlasSource_3dtlw")
 sources/4 = SubResource("TileSetAtlasSource_kb6g4")
 
-[node name="Level3" type="Node2D"]
-script = ExtResource("1_ywdc3")
+[node name="Level4" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("2_luy1r")]
 z_index = 3
@@ -17288,7 +17287,5 @@ layer_3/y_sort_origin = 0
 layer_3/z_index = 2
 layer_3/tile_data = PackedInt32Array(-262213, 2555908, 34, -196677, 2555908, 35, -131141, 2555908, 36, -65605, 2555908, 37, -69, 2555908, 38, 65467, 2555908, 39, 131003, 2555908, 40, -262212, 2621444, 34, -196676, 2621444, 35, -131140, 2621444, 36, -65604, 2621444, 37, -68, 2621444, 38, 65468, 2621444, 39, 131004, 2621444, 40, -262211, 2686980, 34, -196675, 2686980, 35, -131139, 2686980, 36, -65603, 2686980, 37, -67, 2686980, 38, 65469, 2686980, 39, 131005, 2686980, 40, 196541, 2686980, 41, -262210, 2752516, 34, -196674, 2752516, 35, -131138, 2752516, 36, -65602, 2752516, 37, -66, 2752516, 38, 65470, 2752516, 39, 131006, 2752516, 40, 196542, 2752516, 41, -262209, 2818052, 34, -196673, 2818052, 35, -131137, 2818052, 36, -65601, 2818052, 37, -65, 2818052, 38, 65471, 2818052, 39, 131007, 2818052, 40, 196543, 2818052, 41, -262208, 2883588, 34, -196672, 2883588, 35, -131136, 2883588, 36, -65600, 2883588, 37, -64, 2883588, 38, 65472, 2883588, 39, 131008, 2883588, 40, 196544, 2883588, 41, -262207, 2949124, 34, -196671, 2949124, 35, -131135, 2949124, 36, -65599, 2949124, 37, -63, 2949124, 38, 65473, 2949124, 39, 131009, 2949124, 40, 196545, 2949124, 41, -262206, 3014660, 34, -196670, 3014660, 35, -131134, 3014660, 36, -65598, 3014660, 37, -62, 3014660, 38, 65474, 3014660, 39, 131010, 3014660, 40, 196546, 3014660, 41, -262205, 3080196, 34, -196669, 3080196, 35, -131133, 3080196, 36, -65597, 3080196, 37, -61, 3080196, 38, 65475, 3080196, 39, 131011, 3080196, 40, -262204, 3145732, 34, -196668, 3145732, 35, -131132, 3145732, 36, -65596, 3145732, 37, -60, 3145732, 38, 65476, 3145732, 39, 131012, 3145732, 40, -262203, 3211268, 34, -196667, 3211268, 35, -131131, 3211268, 36, -65595, 3211268, 37, -59, 3211268, 38, 65477, 3211268, 39, 131013, 3211268, 40, -262202, 3276804, 34, -196666, 3276804, 35, -131130, 3276804, 36, -65594, 3276804, 37, -58, 3276804, 38, 65478, 3276804, 39, 131014, 3276804, 40)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
-position = Vector2(-2, -11)
-polygon = PackedVector2Array(767, -358, 780, 529, -539, 499, -577, -49, -329, -359)
+[node name="Knight" parent="." instance=ExtResource("7_srr7x")]
+position = Vector2(-456, -40)

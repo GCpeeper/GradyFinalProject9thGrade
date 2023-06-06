@@ -8,7 +8,7 @@ const MOVE_VECTORS = {
 	State.MOVE_UP: Vector2(0,-250),
 	State.MOVE_DOWN: Vector2(0,250)
 }
-const DAMAGE = [4,5,6]
+const DAMAGE = [14,15,16]
 
 
 var curstate = State.IDLE
@@ -120,8 +120,7 @@ func update_movement_animation():
 func _process(delta):
 	if after_hit < 0.5:
 		after_hit +=delta
-		
-	if after_hit > 0.5:
+	else:
 		modulate = Color.WHITE
 
 func _physics_process(delta):
@@ -151,7 +150,7 @@ func _physics_process(delta):
 			switch_to(State.IDLE)
 	
 	if burning:
-		hit(damageOverTime*delta)
+		hit(damageOverTime*delta,self)
 		
 
 
@@ -181,7 +180,7 @@ func _on_sword_area_body_shape_entered(body_rid, body, body_shape_index, local_s
 			struck = true
 
 		if body is Enemy and struck:
-			body.hit(DAMAGE.pick_random())
+			body.hit(DAMAGE.pick_random(),self)
 
 
 func _on_sword_area_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
@@ -226,10 +225,10 @@ func load(dict):
 	health = dict["health"]
 	curstate = dict["curstate"]
 	
-func hit(damage):
+func hit(damage,hitter):
 	health -= damage
 	modulate = Color.RED
-	after_hit = 0.5
+	after_hit = 0
 
 func burn(damOverTime):
 	damageOverTime = damOverTime

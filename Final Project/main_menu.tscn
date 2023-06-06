@@ -33,8 +33,4 @@ text = "Adventure"
 layout_mode = 2
 text = "Play"
 
-[node name="Select" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Charater"
-
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]

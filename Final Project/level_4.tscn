@@ -17307,6 +17307,15 @@ layer_3/tile_data = PackedInt32Array(-262213, 2555908, 34, -196677, 2555908, 35,
 [node name="Knight" parent="." instance=ExtResource("7_srr7x")]
 position = Vector2(-456, -40)
 
+[node name="Knight2" parent="." instance=ExtResource("7_srr7x")]
+position = Vector2(292, 106)
+
+[node name="Knight3" parent="." instance=ExtResource("7_srr7x")]
+position = Vector2(-144, 335)
+
+[node name="Knight4" parent="." instance=ExtResource("7_srr7x")]
+position = Vector2(38, -157)
+
 [node name="Marker" parent="." instance=ExtResource("9_7a86x")]
 position = Vector2(-670, 31)
 
@@ -17316,4 +17325,7 @@ position = Vector2(-670, 31)
 polygon = PackedVector2Array(-1036, 31, -987, 31, -987, 43, -1035, 43)
 
 [connection signal="died" from="Knight" to="." method="_on_knight_died"]
+[connection signal="died" from="Knight2" to="." method="_on_knight_died"]
+[connection signal="died" from="Knight3" to="." method="_on_knight_died"]
+[connection signal="died" from="Knight4" to="." method="_on_knight_died"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

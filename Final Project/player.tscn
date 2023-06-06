@@ -421,7 +421,8 @@ script = ExtResource("1_s4vwa")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_6j7uf")
-animation = &"walk_up"
+animation = &"swing_right"
+frame = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, 1)

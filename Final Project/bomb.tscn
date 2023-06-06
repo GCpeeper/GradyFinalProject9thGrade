@@ -12,6 +12,7 @@ radius = 64.0
 height = 190.0
 
 [node name="Bomb" type="Node2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_pud2t")
 
 [node name="BoomBoom" parent="." instance=ExtResource("2_6mqcj")]

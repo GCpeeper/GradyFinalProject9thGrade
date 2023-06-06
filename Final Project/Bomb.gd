@@ -4,10 +4,10 @@ var time = 0
 var post_time = 0
 var fire
 var in_fire = false
+var first = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("Created")
 	fire = chance.pick_random()
 	$Flame/FlameArea.monitoring = false
 
@@ -20,7 +20,10 @@ func _process(delta):
 	if time > 2:
 		print("Exploded")
 		if fire == 2:
-			$BoomBoom.queue_free()
+			if first:
+				$BoomBoom.queue_free()
+				first = false
+			print("Killed")
 			$Flame/FlameArea.monitoring = true
 			post_time = 0
 			$Flame.show()

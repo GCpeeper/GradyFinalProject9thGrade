@@ -12,6 +12,7 @@ func _process(delta):
 
 
 func _on_button_pressed():
+	SceneSwitcher.reset_scenes()
 	SceneSwitcher.goto_scene("res://main_menu.tscn")
 
 func save_all():

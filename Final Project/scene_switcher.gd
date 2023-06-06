@@ -15,6 +15,9 @@ func _ready():
 func _process(delta):
 	pass
 
+func reset_scenes():
+	scenes_saved = []
+
 func goto_scene(path):
 	# This function will usually be called from a signal callback,
 	# or some other function in the current scene.

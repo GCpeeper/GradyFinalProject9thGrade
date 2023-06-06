@@ -1,5 +1,7 @@
 extends Enemy
 
+func _ready():
+	health = 50
 
 func hit(dam,hitter):
 	health -= dam

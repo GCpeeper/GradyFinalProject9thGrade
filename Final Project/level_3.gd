@@ -10,9 +10,16 @@ func _ready():
 		randList.append(genRandPos())
 
 func _physics_process(delta):
-	for i in range(20):
-		var new_bomb = bomb.instantiate()
-		new_bomb.position = Vector2(0,0)
+	for i in range(2):
+		var bomb_scene = preload("res://bomb.tscn")
+
+		# Put this where you want to spawn the bombs
+		var mob = bomb_scene.instantiate()
+		mob.position = randList.pick_random()
+
+		# Spawn it by adding it to the Main scene.
+		add_child(mob)
+
 
 func genRandPos():
 	var minX = -577

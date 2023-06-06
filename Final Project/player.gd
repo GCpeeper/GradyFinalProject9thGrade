@@ -24,6 +24,8 @@ var in_down = false
 var in_right = false
 var in_left = false
 var control = true
+@export
+var speed : float = 1
 
 var burning = false
 var damageOverTime = 0
@@ -141,7 +143,7 @@ func _physics_process(delta):
 		
 		
 		if curstate in MOVE_STATES:
-			var collided = move_and_collide(MOVE_VECTORS[curstate]*delta)
+			var collided = move_and_collide(MOVE_VECTORS[curstate]*delta*speed)
 			if Input.is_action_just_released("moveup"):
 				switch_to(State.IDLE)
 			elif Input.is_action_just_released("movedown"):
